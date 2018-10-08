@@ -1,0 +1,24 @@
+#!/usr/bin/python3
+import sys
+
+def main(argv):
+    try:
+        if argv[0] == "help":
+            print("help: prints help menu")
+            print("plus: add amount to subtitle")
+            print("min: subtract amount of subtitle")
+            print("example: subtitle-timer plus 5 x.srt")
+        elif argv[0] == "plus":
+            print("plus command")
+            subtitle = open(argv[1])
+        elif argv[0] == "min":
+            print("min command")
+            subtitle = open(argv[1])
+    except IndexError:
+        print("no or incorrect parameters given")
+        print("for help type help")
+if __name__ == "__main__":
+   main(sys.argv[1:])
+
+def add_or_subtract(amount):
+   print("add_or_subtract", amount) 
