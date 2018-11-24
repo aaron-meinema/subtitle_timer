@@ -50,25 +50,31 @@ class Subtitle:
                     self.sub_write.write(line)
 
     def add_ammount(self, line, index):
-        seconds = int(self.arg_list[2]) % 60
         start_and_end = line.split(' --> ')
-        self.sub_write.write(index + '\n')
         for time in start_and_end:
             splitted = time.split(':')
-            seconds_milisecons_str = str(int(splitted[2].split(',')[0])\
-                                         + seconds) + "," + \
-                                         splitted[2].split(',')[1]
+            time_str = self.get_time_str(splitted)
             if time == start_and_end[0]:
-                start = splitted[0] + ':' + splitted[1] +  ':' + \
-                seconds_milisecons_str
+                start = time_str
             else:
-                end = splitted[0] + ':' + splitted[1] +  ':' + \
-                seconds_milisecons_str
+                end = time_str
         self.sub_write.write(start + ' --> ' + end + '\n')
 
     def end_program(self):
         self.sub_read.close()
         raise SystemExit(0)
+
+    def get_time_str(self, splitted):
+        seconds = int(self.arg_list[2])
+        time_seconds = int(splitted[2].split(',')[0]) + seconds
+        time_minutes = time_seconds/60 + int(splitted[1])
+        time_hours = time_minutes/60 + int(splitted[0])
+        time_seconds %= 60
+        time_minutes %= 60
+        time_str = str(int(time_hours)) + ':' + str(int(time_minutes)) + ':'
+        time_str += str(time_seconds) + "," + splitted[2].split(',')[1]
+        return time_str
+
 
     @staticmethod
     def help_command():
