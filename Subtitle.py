@@ -6,16 +6,14 @@ class Subtitle:
         self.sub_write = open('lol.srt', 'w')
 
     def run_options(self):
-        if self.arg_list[0][1] == "h":
-            self.help_command()
-        elif self.arg_list[0][1] == "r":
-            print(self.read_sub())
-        elif self.arg_list[0][1] == "w":
-            self.write_sub()
-        elif self.arg_list[0][1] == "a":
-            self.add_sub()
-        elif self.arg_list[0][1] == "s":
-            self.sub_tract()
+        function_to_call = {
+            'h': self.help_command,
+            'r': self.read_sub,
+            'w': self.write_sub,
+            'a': self.add_sub,
+            's': self.sub_tract,
+        }[self.arg_list[0][1]]
+        function_to_call()
 
     def read_sub(self):
         return self.sub_read.read()
@@ -52,8 +50,7 @@ class Subtitle:
     def add_ammount(self, line, index):
         start_and_end = line.split(' --> ')
         for time in start_and_end:
-            splitted = time.split(':')
-            time_str = self.get_time_str(splitted)
+            time_str = self.get_time_str(time.split(':'))
             if time == start_and_end[0]:
                 start = time_str
             else:
