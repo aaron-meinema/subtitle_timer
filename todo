@@ -1,0 +1,14 @@
+error messaging
+argument not always needed ie for read you do not need time
+set readfile instead of always calling it
+index number is not printed on lol.srt
+subtracting
+making sub longer on end
+making sub longer on start
+change a subtitle text
+make add sub smaller
+use argparse library, second class maybe
+
+maybe:
+make object for every subtitle_text index and timeline
+other functions(if more functions then make object)
